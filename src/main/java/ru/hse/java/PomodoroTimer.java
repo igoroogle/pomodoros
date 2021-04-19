@@ -1,5 +1,7 @@
 package ru.hse.java;
 
+import java.io.IOException;
+import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -10,6 +12,7 @@ public class PomodoroTimer {
     private Status status = Status.STOP;
     private TimerTask task = null;
 
+    PomodoroTimer() { }
     PomodoroTimer(int workDuration, int restDuration) {
         setTime(workDuration, restDuration);
     }
@@ -17,6 +20,12 @@ public class PomodoroTimer {
     void setTime(int workDuration, int restDuration) {
         this.workDuration = workDuration;
         this.restDuration = restDuration;
+    }
+
+    void setOptimalTime() {
+        int[] optimalTime = Statistics.getOptimalTime();
+        this.workDuration = optimalTime[0];
+        this.restDuration = optimalTime[1];
     }
 
     void start() {
@@ -50,9 +59,16 @@ public class PomodoroTimer {
         }
     }
 
-    int toMilliseconds(int minutes) {
+    private int toMilliseconds(int minutes) {
 //        return minutes * 60 * 1000;
         return minutes * 1000;
+    }
+
+    public int getWorkDuration() {
+        return workDuration;
+    }
+    public int getRestDuration() {
+        return restDuration;
     }
 }
 
