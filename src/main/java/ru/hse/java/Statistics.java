@@ -22,7 +22,7 @@ public class Statistics {
     }
 
     if (scanner == null) {
-      scanner = console;
+      scanner = new Scanner(System.in);
     }
 
     try (FileOutputStream fileOutputStream = new FileOutputStream(file, true)) {

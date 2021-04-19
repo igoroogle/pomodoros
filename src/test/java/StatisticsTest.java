@@ -16,7 +16,7 @@ public class StatisticsTest {
   public void testSave() throws IOException {
     InputStream stdin = System.in;
 
-    for (int i = 2; i <= 3; i++) {
+    for (int i = 1; i <= 3; i++) {
       System.out.println("testing " + i);
       File stats = new File("stats.txt");
       if (stats.exists()) {
@@ -26,7 +26,7 @@ public class StatisticsTest {
       File expected = new File(String.format("src/test/resources/test%d.txt", i));
 //      System.out.println(expected.getAbsoluteFile());
       System.setIn(new FileInputStream(expected.getAbsoluteFile()));
-
+      System.out.println(System.in);
       try {
         while (true)
           Statistics.save(null);
