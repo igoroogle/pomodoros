@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Statistics {
   static int optimalWorkTime = 25;
   static int optimalRestTime = 5;
-  static Scanner console = new Scanner(System.in);
+  public static Scanner console = new Scanner(System.in);
   static File file = new File("./stats.txt");
 
   public static void save(Scanner scanner) throws IOException {
@@ -22,7 +22,7 @@ public class Statistics {
     }
 
     if (scanner == null) {
-      scanner = new Scanner(System.in);
+      scanner = console;
     }
 
     try (FileOutputStream fileOutputStream = new FileOutputStream(file, true)) {

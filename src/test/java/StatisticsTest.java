@@ -24,8 +24,9 @@ public class StatisticsTest {
       }
 
       File expected = new File(String.format("src/test/resources/test%d.txt", i));
-//      System.out.println(expected.getAbsoluteFile());
+
       System.setIn(new FileInputStream(expected.getAbsoluteFile()));
+      Statistics.console = new Scanner(System.in);
       System.out.println(System.in);
       try {
         while (true)
@@ -47,11 +48,11 @@ public class StatisticsTest {
     for (int i = 0; i < 3; i++) {
       Statistics.save(new Scanner(testData[i]));
     }
-
+    Statistics.read();
     int[] ourOptimalTime = Statistics.getOptimalTime();
 
-    assertEquals(ourOptimalTime[0], testOptimalTime[0]);
-    assertEquals(ourOptimalTime[1], testOptimalTime[1]);
+    assertEquals(testOptimalTime[0], ourOptimalTime[0]);
+    assertEquals(testOptimalTime[1], ourOptimalTime[1]);
   }
 
   @Test
