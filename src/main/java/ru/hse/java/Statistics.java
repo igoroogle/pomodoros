@@ -16,6 +16,7 @@ public class Statistics {
      * Создается файл, если не существует
      * Записываются в одной строке данные с консоли в виде (workTime, restTime, success)
      */
+
     if (!file.exists()) {
       file.createNewFile();
     }
@@ -25,13 +26,23 @@ public class Statistics {
     }
 
     try (FileOutputStream fileOutputStream = new FileOutputStream(file, true)) {
-      String userTime = scanner.nextLine() + ' ';
-      byte[] buffer = userTime.getBytes();
+      byte[] buffer;
+
+      String workTime = scanner.next() + ' ';
+      buffer = workTime.getBytes();
       fileOutputStream.write(buffer);
 
-      String success = scanner.nextLine() + '\n';
-      byte[] buffer2 = success.getBytes();
-      fileOutputStream.write(buffer2);
+      String restTime = scanner.next() + ' ';
+      buffer = restTime.getBytes();
+      fileOutputStream.write(buffer);
+
+      String success = scanner.next() + '\n';
+      buffer = success.getBytes();
+      fileOutputStream.write(buffer);
+
+//      System.out.println(workTime);
+//      System.out.println(restTime);
+//      System.out.println(success);
     }
   }
 
