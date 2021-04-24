@@ -6,7 +6,7 @@ import java.util.Scanner;
 class CommandLineParser
 {
     static PomodoroTimer timer = new PomodoroTimer(25, 5);
-    static Scanner scanner = new Scanner(System. in);
+    static Scanner scanner = new Scanner(System.in);
     static String category = "unknown";
 
     public static void main ( String [] arguments )
@@ -15,9 +15,9 @@ class CommandLineParser
             Statistics.read();
         } catch (IOException e) {
             System.out.println("Optimal time is not available yet.");
-            //            e.printStackTrace();
         }
         System.out.println("Welcome! Ready to start?");
+
         waitCommand();
     }
 
@@ -27,11 +27,11 @@ class CommandLineParser
             case "set" -> {
                 System.out.print("Enter work period duration: ");
                 inputString = scanner.nextLine();
-                int workDuration = Integer.valueOf(inputString);
+                int workDuration = Integer.parseInt(inputString);
 
                 System.out.print("Enter rest period duration: ");
                 inputString = scanner.nextLine();
-                int restDuration = Integer.valueOf(inputString);
+                int restDuration = Integer.parseInt(inputString);
 
                 timer.setTime(workDuration, restDuration);
 
@@ -60,24 +60,21 @@ class CommandLineParser
     }
 
     public static void timeIsUp(String nextActivity) {
-        System.out.print("Time is up!");
+        System.out.println("Time is up!");
         if (nextActivity.equals("rest")) {
+            String response;
             System.out.print("Have you succeed? (y/n): ");
-            String response = scanner.nextLine();
-            if (response.equals("y")) {
-                try {
-                    Statistics.save(new Scanner(timer.getWorkDuration() + " " + timer.getRestDuration() + "\n" + "yes" + "\n"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else if (response.equals("n")) {
-                try {
-                    Statistics.save(new Scanner(timer.getWorkDuration() + " " + timer.getRestDuration() + "\n" + "no" + "\n"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            response = scanner.nextLine();
+
+            response = response.equals("y") ? "yes" : "no";
+            try {
+                Statistics.save(new Scanner(
+                  timer.getWorkDuration() + " " + timer.getRestDuration() + " " + response + "\n"));
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
+
         System.out.print("Ready for " + nextActivity + "? (y/n): ");
         String response = scanner.nextLine();
         if (response.equals("y")) {

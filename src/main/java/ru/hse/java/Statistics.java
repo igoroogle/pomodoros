@@ -8,8 +8,12 @@ import java.util.Scanner;
 public class Statistics {
   static int optimalWorkTime = 25;
   static int optimalRestTime = 5;
-  public static Scanner console = new Scanner(System.in);
   static File file = new File("./stats.txt");
+
+  private static void reset() {
+    optimalWorkTime = 25;
+    optimalRestTime = 5;
+  }
 
   public static void save(Scanner scanner) throws IOException {
     /**
@@ -22,27 +26,14 @@ public class Statistics {
     }
 
     if (scanner == null) {
-      scanner = console;
+      scanner = new Scanner(System.in);
     }
 
     try (FileOutputStream fileOutputStream = new FileOutputStream(file, true)) {
-      byte[] buffer;
-
-      String workTime = scanner.next() + ' ';
-      buffer = workTime.getBytes();
-      fileOutputStream.write(buffer);
-
-      String restTime = scanner.next() + ' ';
-      buffer = restTime.getBytes();
-      fileOutputStream.write(buffer);
-
-      String success = scanner.next() + '\n';
-      buffer = success.getBytes();
-      fileOutputStream.write(buffer);
-
-//      System.out.println(workTime);
-//      System.out.println(restTime);
-//      System.out.println(success);
+      while (scanner.hasNextLine()) {
+        String row = scanner.nextLine() + '\n';
+        fileOutputStream.write(row.getBytes());
+      }
     }
   }
 
@@ -72,6 +63,10 @@ public class Statistics {
 
     for (String line : array) {
       String[] words = line.split(" ");
+
+      if (words.length < 3) {
+        continue;
+      }
 
       int workTime = Integer.parseInt(words[0]);
       int restTime = Integer.parseInt(words[1]);
@@ -125,6 +120,14 @@ public class Statistics {
     /**
      * Возвращает массив с оптимальным временем
      */
+
+    reset();
+    try {
+      read();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
     int[] optimalTime = new int[2];
     optimalTime[0] = optimalWorkTime;
     optimalTime[1] = optimalRestTime;
