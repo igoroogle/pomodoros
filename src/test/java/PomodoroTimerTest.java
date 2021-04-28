@@ -1,7 +1,5 @@
-import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import ru.hse.java.PomodoroTimer;
-import ru.hse.java.Status;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,7 +31,7 @@ public class PomodoroTimerTest {
             }
 
             timer.setTime(testWorkDurationTime, testRestDurationTime);
-            int ourWorkDurationTime = PomodoroTimer.getWorkDuration();
+            int ourWorkDurationTime = timer.getWorkDuration();
 
             assertEquals(testWorkDurationTime, ourWorkDurationTime);
         }
@@ -59,34 +57,37 @@ public class PomodoroTimerTest {
             }
 
             timer.setTime(testWorkDurationTime, testRestDurationTime);
-            int ourRestDurationTime = PomodoroTimer.getRestDuration();
+            int ourRestDurationTime = timer.getRestDuration();
 
             assertEquals(testRestDurationTime, ourRestDurationTime);
         }
     }
 
-    @Test
-    public void testSetOptimalTime() {
-        System.out.println("testing set optimal time");
-        PomodoroTimer timer = new PomodoroTimer(25, 5);
-        timer.setOptimalTime();
-    }
+//    @Test
+//    public void testSetOptimalTime() {
+//        System.out.println("testing set optimal time");
+//        PomodoroTimer timer = new PomodoroTimer(25, 5);
+//        timer.setOptimalTime();
+//    }
 
     @Test
     public void testStart() {
         System.out.println("testing start");
-        PomodoroTimer.setStatus(ru.hse.java.Status.REST);
-        PomodoroTimer.start();
+        var timer = new PomodoroTimer();
+        timer.setStatus(ru.hse.java.Status.REST);
+        timer.start();
 
-        PomodoroTimer.setStatus(ru.hse.java.Status.WORK);
-        PomodoroTimer.start();
+        timer.setStatus(ru.hse.java.Status.WORK);
+        timer.start();
     }
 
     @Test
     public void testStop() {
         System.out.println("testing stop");
-        PomodoroTimer.setStatus(ru.hse.java.Status.WORK);
-        PomodoroTimer.stop();
-        PomodoroTimer.stop();
+
+        var timer = new PomodoroTimer();
+        timer.setStatus(ru.hse.java.Status.WORK);
+        timer.stop();
+        timer.stop();
     }
 }
