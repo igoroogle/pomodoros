@@ -7,12 +7,18 @@ public class TimerSettings implements Comparable<TimerSettings> {
   private int fails = 0;
 
   public TimerSettings(int workTime, int restTime, int success, int fails) {
+    if (workTime <= 0 || restTime <= 0 || success < 0 || fails < 0) {
+      throw new IllegalArgumentException();
+    }
     this.workTime = workTime;
     this.restTime = restTime;
     this.success = success;
     this.fails = fails;
   }
   public TimerSettings(int workTime, int restTime) {
+    if (workTime <= 0 || restTime <= 0) {
+      throw new IllegalArgumentException();
+    }
     this.workTime = workTime;
     this.restTime = restTime;
   }
@@ -29,7 +35,7 @@ public class TimerSettings implements Comparable<TimerSettings> {
   }
   @Override
   public int compareTo(TimerSettings o) {
-    return success - o.score();
+    return score() - o.score();
   }
   @Override
   public String toString() {

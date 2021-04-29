@@ -16,6 +16,9 @@ public class PomodoroTimer {
     }
 
     public void setTime(int workDuration, int restDuration) {
+        if (restDuration <= 0 || workDuration <= 0) {
+            throw new IllegalArgumentException();
+        }
         this.workDuration = workDuration;
         this.restDuration = restDuration;
     }
@@ -64,6 +67,6 @@ public class PomodoroTimer {
     }
 
     public void setStatus(Status status) {
-        status = status;
+        this.status = status;
     }
 }

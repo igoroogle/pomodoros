@@ -9,8 +9,6 @@ import static org.junit.Assert.assertEquals;
 
 public class PomodoroTimerTest {
 
-    private ru.hse.java.Status Status;
-
     @Test
     public void testGetWorkDuration() throws FileNotFoundException {
         for (int i = 1; i <= 5; i++) {
@@ -20,8 +18,8 @@ public class PomodoroTimerTest {
             File test = new File(String.format("src/test/resources/tests/test%d.txt", i));
             Scanner scanner = new Scanner(test);
 
-            int testWorkDurationTime = 0;
-            int testRestDurationTime = 0;
+            int testWorkDurationTime = 1;
+            int testRestDurationTime = 1;
 
             if (scanner.hasNextInt()) {
                 testWorkDurationTime = scanner.nextInt();
@@ -46,8 +44,8 @@ public class PomodoroTimerTest {
             File test = new File(String.format("src/test/resources/tests/test%d.txt", i));
             Scanner scanner = new Scanner(test);
 
-            int testWorkDurationTime = 0;
-            int testRestDurationTime = 0;
+            int testWorkDurationTime = 1;
+            int testRestDurationTime = 1;
 
             if (scanner.hasNextInt()) {
                 testWorkDurationTime = scanner.nextInt();
@@ -62,13 +60,6 @@ public class PomodoroTimerTest {
             assertEquals(testRestDurationTime, ourRestDurationTime);
         }
     }
-
-//    @Test
-//    public void testSetOptimalTime() {
-//        System.out.println("testing set optimal time");
-//        PomodoroTimer timer = new PomodoroTimer(25, 5);
-//        timer.setOptimalTime();
-//    }
 
     @Test
     public void testStart() {
@@ -87,6 +78,7 @@ public class PomodoroTimerTest {
 
         var timer = new PomodoroTimer();
         timer.setStatus(ru.hse.java.Status.WORK);
+        timer.start();
         timer.stop();
         timer.stop();
     }

@@ -9,6 +9,10 @@ public class Statistics {
   private static HashMap<String, ArrayList<TimerSettings>> statistics = null;
   static File file = new File("./stats.txt");
 
+  public static void setStatistics(HashMap<String, ArrayList<TimerSettings>> statistics) {
+    Statistics.statistics = statistics;
+  }
+  public static HashMap<String, ArrayList<TimerSettings>> getStatistics() {return statistics;}
   public static void save() throws IOException {
     /**
      * Создается файл, если не существует
