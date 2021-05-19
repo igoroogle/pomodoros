@@ -59,17 +59,11 @@ public class PomodoroTimer {
         return minutes * 1000;
     }
 
-//    public int getWorkDuration() {
-//        return workDuration;
-//    }
-//    public int getRestDuration() {
-//        return restDuration;
-//    }
     public int getWorkDuration() {
-        return restDuration;
+        return workDuration;
     }
     public int getRestDuration() {
-        return workDuration;
+        return restDuration;
     }
 
     public void setStatus(Status status) {
