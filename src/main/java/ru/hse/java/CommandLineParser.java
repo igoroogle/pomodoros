@@ -94,6 +94,7 @@ class CommandLineParser
             waitCommand();
         }
     }
+    
     private static void finish() {
         try {
             Statistics.save();
